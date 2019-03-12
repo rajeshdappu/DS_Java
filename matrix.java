@@ -4,12 +4,12 @@ class matrix{
             {1,2,3,4},
             {5,6,7,8},
             {9,10,11,12},
-            {13,14,15,16}      
+            // {13,14,15,16}      
         };
-        print(matrix,4,4);
-        // transpose(matrix,4,4);
-        // rotateClockwise(matrix,4,4);
-        rotateAntiClockwise(matrix,4,4);
+        print(matrix,3,4);
+        transpose(matrix,3,4);
+        rotateClockwise(matrix,3,4);
+        rotateAntiClockwise(matrix,3,4);
         
     }
 
@@ -71,7 +71,7 @@ class matrix{
             }
             colStart++;
         }
-        print(mt,4,4);
+        print(mt,r,c);
     }
 
     static void rotateAntiClockwise(int mt[][],int r,int c){
@@ -111,6 +111,6 @@ class matrix{
             }
             colEnd--;
         }
-        print(mt,4,4);
+        print(mt,r,c);
     }
 }
