@@ -4,12 +4,21 @@ class matrix{
             {1,2,3,4},
             {5,6,7,8},
             {9,10,11,12},
-            // {13,14,15,16}      
+            {13,14,15,16}      
         };
-        print(matrix,3,4);
-        transpose(matrix,3,4);
-        rotateClockwise(matrix,3,4);
-        rotateAntiClockwise(matrix,3,4);
+        print(matrix,4,4);
+        // transpose(matrix,3,4);
+        // rotateClockwise(matrix,3,4);
+        // rotateAntiClockwise(matrix,3,4);
+        // rotateClockwise90(matrix,4,4);
+        // rotateAntiClockwise90(matrix,4,4);
+
+        int[][] m1 = {
+            {1,2,3},
+            {4,5,6},
+            {7,8,9}
+        };
+        matrixMultplication(m1,3,3,m1,3,3);
         
     }
 
@@ -23,14 +32,16 @@ class matrix{
         System.out.println("-----------------------");
     }  
 
-    static void transpose(int m[][],int rows,int cols){
+    static int[][] transpose(int m[][],int rows,int cols){
         int[][] newMatrix = new int[cols][rows];
         for(int i=0;i<rows;i++){
             for(int j=0;j<cols;j++){
                 newMatrix[j][i] = m[i][j];
             }
         }
+                System.out.println("Transpose ,");
         print(newMatrix,cols,rows);
+        return newMatrix;
     } 
 
     static void rotateClockwise(int mt[][],int r,int c){
@@ -71,6 +82,7 @@ class matrix{
             }
             colStart++;
         }
+
         print(mt,r,c);
     }
 
@@ -112,5 +124,40 @@ class matrix{
             colEnd--;
         }
         print(mt,r,c);
+    }
+
+    static void rotateClockwise90(int mt[][],int r, int c){
+        mt = transpose(mt,r,c); // because rotation in clockwise means tranpose + reversing columns
+        for(int i=0;i<r;i++){
+            for(int j=0,k=c-1;j<k;j++,k--){
+                int temp = mt[i][j];
+                mt[i][j] = mt[i][k];
+                mt[i][k] = temp;
+            }
+        }
+        print(mt,r,c);
+    }
+
+    static void rotateAntiClockwise90(int mt[][],int r, int c){
+        mt = transpose(mt,r,c); // because rotation in anti-clockwise means tranpose + reversing rows
+        for(int i=0,j=r-1;i<j;i++,j--){
+            int temp[] = mt[i];
+            mt[i] = mt[j];
+            mt[j] = temp;
+        }
+        print(mt,r,c);
+    }
+
+    static void matrixMultplication(int m1[][],int r1,int c1,int m2[][],int r2,int c2){
+        int result[][] = new int [r1][c2];
+        for(int i=0;i<r1;i++){
+            for(int j=0;j<c2;j++){
+                result[i][j] = 0;
+                for(int k=0;k<c1;k++){
+                    result[i][j] =  result[i][j] + (m1[i][k] * m2[k][j]);
+                }
+            }
+        }
+        print(result,r1,c2);
     }
 }
