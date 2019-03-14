@@ -6,14 +6,15 @@ class graph{
         char nodes[] = {'A','B','C','D','E'}; 
         int a[][]  = { //adjacency matrix of graph nodes A,B,C,D,E
             {1,0,1,0,0},
-            {0,1,0,0,0},
-            {0,1,1,1,0},
-            {0,0,0,1,1},
+            {0,1,0,1,0},
+            {0,0,1,0,0},
+            {0,0,0,1,0},
             {0,0,0,0,1}
         };
 
         // DFSTraversal(nodes,a);
-        BFSTraversal(nodes,a);
+        // BFSTraversal(nodes,a);
+        topologicalSort(a,nodes);
 
     }
 
@@ -67,5 +68,39 @@ class graph{
                     }
                 }
             }
+    }
+
+
+    static void topologicalSort(int a[][],char nodes[]){
+        int[] inDegree = new int[nodes.length];
+        int[] topologicalOrder = new int[nodes.length];
+        int counter=0;
+        for(int i=0;i<nodes.length;i++){
+            for(int j=0;j<nodes.length;j++){
+                if((a[i][j] == 1) && (i!=j)) inDegree[j]++;
+            }
+        }
+        for(int i=0;i<nodes.length;i++){
+            System.out.println("In degree : "+nodes[i] +" - "+ inDegree[i]);
+        }
+
+        Queue<Integer> queue = new LinkedList<Integer>();
+        for(int i=0;i<nodes.length;i++){
+            if(inDegree[i]==0)queue.add(i);
+        };
+        while(queue.size()>0){
+            int node = queue.remove();
+            topologicalOrder[node] = counter++;
+            for(int i=0;i<nodes.length;i++){
+                if(a[node][i] == 1){
+                    if(--inDegree[i]==0){
+                        queue.add(i);
+                    }
+                }
+            }
+        }
+        for(int i=0;i<nodes.length;i++){
+            System.out.println("Topological order of  : "+nodes[i] +" - "+ topologicalOrder[i]);
+        }
     }
 }
