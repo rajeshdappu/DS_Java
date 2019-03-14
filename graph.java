@@ -1,22 +1,40 @@
 import java.util.Queue;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.lang.Integer;
+import java.util.Comparator;
 class graph{
     public static void main(String args[]){
         System.out.println("Hello");
         char nodes[] = {'A','B','C','D','E'}; 
         int a[][]  = { //adjacency matrix of graph nodes A,B,C,D,E
-            {1,1,0,0,1},
-            {0,1,1,0,0},
-            {0,0,1,1,0},
-            {1,0,0,1,0},
-            {0,0,1,0,1}
+            {1,1,1,0,0},
+            {0,1,0,0,1},
+            {0,1,1,1,0},
+            {0,0,0,1,1},
+            {0,0,0,0,1}
         };
 
         // DFSTraversal(nodes,a);
         // BFSTraversal(nodes,a);
         // topologicalSort(a,nodes);
 
-        unweightedShortestPaths(a,nodes,0);
+        
+
+        // unweightedShortestPaths(a,nodes,0);
+
+
+        int weights[][] = {
+            {0,4,1,0,0},
+            {0,0,0,0,4},
+            {0,2,0,4,0},
+            {0,0,0,0,4},
+            {0,0,0,0,0}
+        };
+
+        // Node[] nodesWithPriority  = {new Node('A',0),new Node('B',0),new Node('C',0),new Node('D',0),new Node('E',0)};
+
+        weightedShortestPaths(a,nodes,0,weights);
 
     }
 
@@ -136,32 +154,35 @@ class graph{
     }
 
 
-      static void unweightedShortestPaths(int a[][],char nodes[],int fromNodeIndex){
-        int[] distance = new int[nodes.length];
+      static void weightedShortestPaths(int a[][],char nodes[],int fromNodeIndex,int weights[][]){ //Dijkstra's Alogrithm using distance and paths array , without using priority queues
         int[] path = new int[nodes.length];
-        for(int i=0;i<nodes.length;i++)distance[i]=-1;
-        distance[fromNodeIndex]=0;
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(fromNodeIndex);
+        int[] distance = new int[nodes.length];
+        int[] visited = new int[nodes.length];
+        for(int i=0;i<distance.length;i++)distance[i] = Integer.MAX_VALUE;
+        PriorityQueue<Node> queue  = new PriorityQueue<Queue>(new Node());
+        queue.add(new Node(fromNodeIndex,0));
         while(queue.size()>0){
-            int node = queue.remove();
-            for(int i=0;i<nodes.length;i++){
-                if(a[node][i] == 1){
-                    if(distance[i] == -1){
-                        distance[i] = distance[node]+1;
-                        path[i] = node;
-                        queue.add(i);
-                    }
-                }
-            }
+            
         }
+      }
 
-        for(int i=0;i<nodes.length;i++){
-            System.out.println("Path of  : "+nodes[i] +" - "+ nodes[path[i]]);
-        }
+      static class Node implements Comparator<Node>{
+          int index;
+          int cost;
+          Node(int value,int cost){
+              this.index = value;
+              this.cost = cost;
+          }
 
-         for(int i=0;i<nodes.length;i++){
-            System.out.println("Distance of  : "+nodes[i] +" - "+ distance[i]);
-        }
-    }
+        @Override
+        public int compare(Node node1, Node node2) 
+        { 
+            if (node1.cost < node2.cost) 
+                return -1; 
+            if (node1.cost > node2.cost) 
+                return 1; 
+            return 0; 
+        } 
+      }
+    
 }
