@@ -1,20 +1,85 @@
 import java.util.Queue;
 import java.util.Stack;
 import java.util.LinkedList;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.*;
 import java.lang.*;
 class TreeTraversal {
     public static void main(String args[]){
 
         Node head = createSampleTree();
 
-        verticalOrder(head);
+        // verticalOrder(head);
+
+        // verticalOrderWithHashMap(head);
+
+        verticalOrderWithHashMapLevelOrderTraversal(head);
+
 
         // preOrder(head);
 
         // levelOrder(head);
 
         // zigzagOrder(head);
+    }
+
+    static void verticalOrderWithHashMapLevelOrderTraversal(Node root){
+        HashMap<Integer,List<Node>> hash = new HashMap();
+        Queue<Pair> q = new LinkedList<Pair>();
+        q.add(new Pair(root,0));
+        while(q.size()!=0){
+            Pair p = q.remove();
+            if(!hash.containsKey(p.hd))hash.put(p.hd,new ArrayList<Node>());
+            hash.get(p.hd).add(p.node);
+            if(p.node.left!=null)q.add(new Pair(p.node.left,p.hd-1));
+            if(p.node.right!=null)q.add(new Pair(p.node.right,p.hd+1));
+        }
+
+        int min = 0;
+        int max = 0;
+        for(int key: hash.keySet()){
+           if(key<min) min = key;
+           if(key>max) max = key;
+        }
+        for(int i=min;i<=max;i++){
+            List<Node> list = hash.get(i);
+            for(Node n: list){
+                System.out.print(n.data+" ");
+            }
+             System.out.println();
+        }
+    }
+
+    static class Pair{
+        Node node;
+        int hd;
+
+        Pair(Node node,int hd){
+            this.node = node;
+            this.hd = hd;
+        }
+    }
+
+    static void verticalOrderWithHashMap(Node root){
+        HashMap<Integer,List<Node>> hash = new HashMap();
+        getVerticalOrderIntoHashMap(root,hash,0);
+        for(int key: hash.keySet()){
+            List<Node> list = hash.get(key);
+            for(Node n: list){
+                System.out.print(n.data+" ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void getVerticalOrderIntoHashMap(Node root,HashMap<Integer,List<Node>> hash,int hd){
+        if(root!=null){
+            if(!hash.containsKey(hd))hash.put(hd,new ArrayList<Node>());
+            hash.get(hd).add(root);
+            getVerticalOrderIntoHashMap(root.left,hash,hd-1);
+            getVerticalOrderIntoHashMap(root.right,hash,hd+1);
+        }
     }
 
     static void verticalOrder(Node root){
