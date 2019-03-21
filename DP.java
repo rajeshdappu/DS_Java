@@ -9,6 +9,17 @@ class DP{
         // System.out.println(LpngestPolindromicSubsequence("ccc".toCharArray()));
         // int[] a ={40, 20, 30, 10, 30}  ; //
         // System.out.println(matrixProductParanthesization(a));
+
+       int  val[] = {10, 40, 50, 70};
+       int wt[]  = {1, 3, 4, 5} ;
+
+
+    //    System.out.println(unBoundedKnapsack(wt,val,8));
+
+    int[] a = {5,6,2,3,4,1,9,9,8,9,5};
+    //    System.out.println(longestIncreasingSubsequence(a));
+
+       System.out.println(longestValidParentheses(")()())"));
     }
 
     static int LongestCommonSubsequence(char a[],char b[]){
@@ -150,4 +161,41 @@ class DP{
         return a>b ?a:b;
     }
 
+    static int longestIncreasingSubsequence(int a[]){
+        if(a.length < 2) return a.length;
+        int[] lengths = new int[a.length];
+        for(int i=0;i<lengths.length;i++)lengths[i]=1;
+        for(int i=1;i<lengths.length;i++){
+            for(int j=0;j<i;j++){
+                if(a[i]>a[j] && lengths[i]<lengths[j]+1){
+                    lengths[i] = lengths[j]+1;
+                }
+            }
+        }
+        int max=0;
+        for(int i=1;i<lengths.length;i++){
+            System.out.print(lengths[i] +" ");
+            if(max<lengths[i])max=lengths[i];
+        }
+
+        for(int i=1;i<lengths.length;i++){
+          if(lengths[i] == max){
+              int maxTillNow = i;
+              System.out.println(a[i]);
+              for(int j=i;j>=0;j--){
+                  if(a[j]<a[maxTillNow]){
+                      maxTillNow = j;
+                      System.out.println(a[j]);
+                  }
+              }
+          }
+        }
+        return max;
+    }
+
+
+    static int longestValidParentheses(String s){
+        char[] a = s.toCharArray();
+        return 0;
+    }
 }
