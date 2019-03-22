@@ -14,14 +14,41 @@ class TreeTraversal {
 
         // verticalOrderWithHashMap(head);
 
-        verticalOrderWithHashMapLevelOrderTraversal(head);
+        // verticalOrderWithHashMapLevelOrderTraversal(head);
 
-
+        topView(head);
         // preOrder(head);
 
         // levelOrder(head);
 
         // zigzagOrder(head);
+    }
+
+    static void topView(Node root){
+        HashMap<Integer,Node> hash =  new HashMap();
+        Queue<Pair> q = new LinkedList();
+        q.add(new Pair(root,0));
+        while(q.size()>0){
+            Pair p= q.remove();
+            if(!hash.containsKey(p.hd)){
+                hash.put(p.hd,p.node);
+            }
+            if(p.node.left!=null){
+                q.add(new Pair(p.node.left,p.hd-1));
+            }if(p.node.right!=null){
+                q.add(new Pair(p.node.right,p.hd+1));
+            }
+        }
+
+        int min=0;
+        int max = 0;
+        for(int key:hash.keySet()){
+            if(key<min)min=key;
+            if(key>max)max = key;
+        }
+        for(int i=min;i<=max;i++){
+            System.out.println(hash.get(i).data);
+        }
     }
 
     static void verticalOrderWithHashMapLevelOrderTraversal(Node root){
