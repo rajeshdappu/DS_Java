@@ -1,9 +1,9 @@
 public class sortings{
     public static void main(String args[]){
         int[] a = {10,3,4,1,2,4,3,6,2,5,66};
-        // bubbleSort(a);
-        // selectionSort(a);
-        insertionSort(a);
+         bubbleSort(a);
+         selectionSort(a);
+//        insertionSort(a);
     }
 
     static void bubbleSort(int a[]){
@@ -36,12 +36,13 @@ public class sortings{
         print(a);
     }
 
-    // static void insertionSort(int a[]){
-    //     for(int i=1;i<a.length;i++){
-    //         int j = i-1;
-    //         while(j>0 && a[j] > a[j-1])
-    //     }
-    // }
+     static void insertionSort(int a[]){
+         for(int i=1;i<a.length;i++){
+             int j = i-1;
+             while(j>0 && a[j] > a[j-1]);
+         }
+         print(a);
+     }
 
     static void print(int a[]){
         for(int i=0;i<a.length;i++){

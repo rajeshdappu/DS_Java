@@ -7,15 +7,15 @@ import java.util.Random;
 class priorityQueue{
     public static void main(String args[]){
 
-        Queue<Integer> q = new PriorityQueue<Integer>(7,new CustomerComparator());
-        Random rand = new Random();
-		for(int i=0;i<7;i++){
-			q.add(new Integer(rand.nextInt(100)));
-		}
-
-        for(int i=0;i<7;i++){
-			System.out.println(q.remove());
-		}
+//        Queue<Integer> q = new PriorityQueue<Integer>(7,new CustomerComparator());
+//        Random rand = new Random();
+//		for(int i=0;i<7;i++){
+//			q.add(new Integer(rand.nextInt(100)));
+//		}
+//
+//        for(int i=0;i<7;i++){
+//			System.out.println(q.remove());
+//		}
 
     }
 

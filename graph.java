@@ -155,15 +155,15 @@ class graph{
 
 
       static void weightedShortestPaths(int a[][],char nodes[],int fromNodeIndex,int weights[][]){ //Dijkstra's Alogrithm using distance and paths array , without using priority queues
-        int[] path = new int[nodes.length];
-        int[] distance = new int[nodes.length];
-        int[] visited = new int[nodes.length];
-        for(int i=0;i<distance.length;i++)distance[i] = Integer.MAX_VALUE;
-        PriorityQueue<Node> queue  = new PriorityQueue<Queue>(new Node());
-        queue.add(new Node(fromNodeIndex,0));
-        while(queue.size()>0){
-            
-        }
+//        int[] path = new int[nodes.length];
+//        int[] distance = new int[nodes.length];
+//        int[] visited = new int[nodes.length];
+//        for(int i=0;i<distance.length;i++)distance[i] = Integer.MAX_VALUE;
+//        PriorityQueue<Node> queue  = new PriorityQueue<Queue>(new Node());
+//        queue.add(new Node(fromNodeIndex,0));
+//        while(queue.size()>0){
+//
+//        }
       }
 
       static class Node implements Comparator<Node>{
